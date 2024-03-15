@@ -1,6 +1,5 @@
 export const fileUpload = async( file ) => {
     
-    // if( !file ) throw new Error('No hay archivo');
     if( !file ) return null;
     console.log({ file });
     const cloudURL = 'https://api.cloudinary.com/v1_1/dsadgfahr/upload';

@@ -3,7 +3,7 @@
 export const uploadNewItem = async ( data ) => {
 
     const url = 'https://script.google.com/macros/s/AKfycbzwuStmESDry6-PDaUVnplf2Cpen6wh3GOyIGFJvyg-h9GUB0ul8cYrpkP3UCjRHu2l/exec';
-    
+
     const formattedData = new URLSearchParams({
         Producto: data.Producto,
         Cantidad: data.Cantidad,
@@ -25,6 +25,4 @@ export const uploadNewItem = async ( data ) => {
     } catch (error) {
         console.log(error);
     }
-
-    // return {}
 }

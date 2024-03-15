@@ -6,7 +6,6 @@ export const UserDataForm = ({ userData, handleInputChange, setFormSubmitted }) 
 
     useEffect(() => {
         const entries = Object.entries(userData);
-        console.log(userData);
         const allValuesPresent = entries.every(([key, value ]) => value.trim() !== '' && value.trim().length > 2);
         if (allValuesPresent) {
             setDisabled( false );
@@ -16,6 +15,8 @@ export const UserDataForm = ({ userData, handleInputChange, setFormSubmitted }) 
 
     const handleSubmit = ( e ) => {
         e.preventDefault();
+        localStorage.setItem('user', JSON.stringify(userData));
+        console.log({ userData });
         setFormSubmitted(true);
     }
 
