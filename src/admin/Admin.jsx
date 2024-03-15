@@ -2,6 +2,7 @@ import { Box, Button, CircularProgress, TextField, Typography } from "@mui/mater
 import { useForm } from "../hooks";
 import { useEffect, useState } from "react";
 import { fileUpload } from "../helpers/fileUpload";
+import { uploadNewItem } from "../helpers/uploadNewItem";
 // import { CloudinaryContext, Image, Transformation } from 'cloudinary-react';
 
 export const Admin = () => {
@@ -24,7 +25,7 @@ export const Admin = () => {
     const { handleInputChange } = useForm();
 
     const onFileInputChange = ({ target }) => {
-        const imageFile = target.files;
+        const imageFile = target.files[0];
         console.log(imageFile);
         setFormValues({ ...formValues, Imagen: imageFile })
     }
@@ -62,6 +63,14 @@ export const Admin = () => {
                 Cantidad: '',
                 Imagen: '',
             })
+
+            const data = {
+                Producto,
+                Cantidad,
+                Imagen: url,
+            }
+
+            uploadNewItem(data);
 
         } else {
             setEvents((prevEvents) => ({
