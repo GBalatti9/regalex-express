@@ -45,8 +45,8 @@ export const SelectGift = ({ userData, data, handleInputChange }) => {
             isLoading: true,
         }))
         
-        const info = await fetchToSheets(JSON.parse(localStorage.getItem('user')), JSON.parse(localStorage.getItem('userChoice')));
-        console.log({info});
+        await fetchToSheets(JSON.parse(localStorage.getItem('user')), JSON.parse(localStorage.getItem('userChoice')));
+
         localStorage.removeItem('info');
         localStorage.removeItem('user');
         localStorage.removeItem('userChoice');
@@ -89,7 +89,7 @@ export const SelectGift = ({ userData, data, handleInputChange }) => {
                                                             component="img"
                                                             alt={element.nombre}
                                                             // height="140"
-                                                            image={`/regalex-claudio/${element.imagen}`}
+                                                            image={ element.imagen?.includes('https') ? element.imagen : `/regalex-claudio/${element.imagen}`}
                                                         />
                                                         <Checkbox
                                                             id={element.nombre}

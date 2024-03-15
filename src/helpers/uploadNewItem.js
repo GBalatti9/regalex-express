@@ -8,6 +8,7 @@ export const uploadNewItem = async ( data ) => {
         Producto: data.Producto,
         Cantidad: data.Cantidad,
         Imagen: data.Imagen,
+        Estado: 'Estirar de la celda de arriba para activar el funcionamiento',
         SheetName: 'Hoja1'
     });
 
