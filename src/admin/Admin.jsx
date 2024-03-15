@@ -34,9 +34,7 @@ export const Admin = () => {
         const { name, value } = e.target;
         if (name === 'Imagen') return;
         setFormValues({ ...formValues, [name]: value });
-
         handleInputChange(e.target);
-        console.log({ formValues });
     }
 
     const handleSubmit = async (e) => {
@@ -50,11 +48,9 @@ export const Admin = () => {
 
         const url = await fileUpload(Imagen);
 
-
         if (url) {
             setEvents((prevEvents) => ({
                 ...prevEvents,
-                loading: false,
                 successUpload: true,
             }));
 
@@ -70,18 +66,28 @@ export const Admin = () => {
                 Imagen: url,
             }
 
-            uploadNewItem(data);
+            const response = await uploadNewItem(data);
+            // El loading es false recién cuando la información se carga a google sheets y además se maneja el caso en que la imagen se carga a cloudinary pero hay un error en la conexión con google sheets.
+            if (response.ok) {
+                setEvents((prevEvents) => ({
+                    ...prevEvents,
+                    loading: false
+                }))
+            } else {
+                setEvents((prevEvents) => ({
+                    ...prevEvents,
+                    loading: false,
+                    error: 'No se pudo cargar la imagen. Intente de nuevo (recargue la página) o contacte a soporte'
+                }));
+            }
 
         } else {
             setEvents((prevEvents) => ({
                 ...prevEvents,
                 loading: false,
-                error: 'No se pudo cargar la imagen. Intente de nuevo o contacte a soporte'
+                error: 'No se pudo cargar la imagen. Intente de nuevo (recargue la página) o contacte a soporte'
             }));
         }
-
-
-
     }
 
     const isFormValid = formValues.Producto && formValues.Cantidad && formValues.Imagen;

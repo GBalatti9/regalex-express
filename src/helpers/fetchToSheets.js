@@ -13,6 +13,7 @@ export const fetchToSheets = async (data) => {
         Whatsapp: wapp,
         Regalo: answer,
         Cantidad: "1",
+        SheetName: 'Hoja2'
     });
     try {
         console.log({formattedData});
@@ -26,6 +27,6 @@ export const fetchToSheets = async (data) => {
         const data = await response;
         return data;
     } catch (error) {
-        console.log(error);
+        return error;
     }
 }
