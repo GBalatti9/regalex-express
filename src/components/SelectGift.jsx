@@ -24,7 +24,7 @@ export const SelectGift = ({ userData, data, handleInputChange }) => {
 
     const handleCheckboxChange = ( e, element ) => {
         console.log({e}, {element});
-        console.log('se cliqueo');
+        localStorage.setItem('userChoice', JSON.stringify(element));
         const updatedElements = data.info.map((el) => ({
             ...el,
             isSelected: el.nombre === element.nombre,
@@ -45,9 +45,11 @@ export const SelectGift = ({ userData, data, handleInputChange }) => {
             isLoading: true,
         }))
         
-        const info = await fetchToSheets(userData);
+        const info = await fetchToSheets(JSON.parse(localStorage.getItem('user')), JSON.parse(localStorage.getItem('userChoice')));
         console.log({info});
         localStorage.removeItem('info');
+        localStorage.removeItem('user');
+        localStorage.removeItem('userChoice');
         setAnswerSent(( prevAnswerSent ) => ({
             ...prevAnswerSent,
             isLoading: false,
