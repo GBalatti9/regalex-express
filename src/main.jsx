@@ -9,12 +9,14 @@ import ReactDOM from 'react-dom/client'
 import { App } from './App.jsx'
 import { AppTheme } from './theme/AppTheme.jsx';
 import { BrowserRouter } from 'react-router-dom';
+import { AppRouter } from './router/AppRouter.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
     <AppTheme>
-      <App />
+      {/* <App /> */}
+      <AppRouter />
     </AppTheme>
     </BrowserRouter>
   </React.StrictMode>,

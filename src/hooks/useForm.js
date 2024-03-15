@@ -11,7 +11,7 @@ export const useForm = () => {
     const [ userData, setUserData ] = useState(initialState);
 
     const handleInputChange = ({ name, value, checked, type }) => {
-        
+        console.log({ name, value });
         if (type === 'checkbox' ) {
             setUserData(( prevUserData ) => {
                 let newState = { ...prevUserData }
