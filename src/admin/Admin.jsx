@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CircularProgress, TextField, Typography } from "@mui/material";
 import { useForm } from "../hooks";
 import { useEffect, useState } from "react";
 import { fileUpload } from "../helpers/fileUpload";
@@ -25,6 +25,7 @@ export const Admin = () => {
     const { handleInputChange } = useForm();
 
     const onFileInputChange = ({ target }) => {
+        console.log('estoy aca');
         const imageFile = target.files[0];
         console.log(imageFile);
         setFormValues({ ...formValues, Imagen: imageFile })
@@ -32,7 +33,8 @@ export const Admin = () => {
 
     const onChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'Imagen') return;
+        console.log({ name, value });
+        // if (name === 'Imagen') return;
         setFormValues({ ...formValues, [name]: value });
         handleInputChange(e.target);
     }
@@ -92,24 +94,28 @@ export const Admin = () => {
 
     const isFormValid = formValues.Producto && formValues.Cantidad && formValues.Imagen;
     return (
-        <>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
             {
                 events.loading
                     ? 
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                    <div>
                         <CircularProgress />
                     </div>
                     : 
                     events.error == '' ?
                         <>
-                            <Typography variant="h3">Ingresar un nuevo producto</Typography>
+                            <Typography variant="h4" sx={{ marginBottom: '10px' }}>Ingresar un nuevo producto</Typography>
                             <form onSubmit={handleSubmit}>
-                                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                                    <TextField label="Producto" name="Producto" onChange={onChange} value={formValues.Producto}></TextField>
-                                    <TextField label="Cantidad" type="number" name="Cantidad" onChange={onChange} value={formValues.Cantidad} />
-                                    <input type="file" onChange={onFileInputChange} name="Imagen" />
-                                </Box>
-                                <Button type="submit" variant="contained" disabled={!isFormValid}> Cargar Producto </Button>
+                                <Card>
+                                    <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
+                                        <TextField label="Producto" name="Producto" onChange={onChange} value={formValues.Producto} sx={{ marginBottom: '10px' }}></TextField>
+                                        <TextField label="Cantidad" type="number" name="Cantidad" onChange={onChange} value={formValues.Cantidad} sx={{ marginBottom: '10px' }}/>
+                                        <input type="file" onChange={onFileInputChange} name="Imagen"/>
+                                    </CardContent>
+                                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                        <Button type="submit" variant="contained" disabled={!isFormValid} sx={{ marginBottom: '10px', display: 'flex'}}> Cargar Producto </Button>
+                                    </Box>
+                                </Card>
                             </form>
                         </>
                         : 
@@ -122,6 +128,6 @@ export const Admin = () => {
                 events.successUpload ? <Typography variant="h3">Información cargada con éxito</Typography> : ''
             }
 
-        </>
+        </div>
     )
 }
