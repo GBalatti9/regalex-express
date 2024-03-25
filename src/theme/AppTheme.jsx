@@ -2,6 +2,7 @@
 
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { theme } from './theme';
+import { AppRouter } from '../router/AppRouter';
 
 export const AppTheme = ({ children }) => {
     
@@ -9,7 +10,8 @@ export const AppTheme = ({ children }) => {
     <ThemeProvider theme={ theme }>
         <CssBaseline />
 
-        { children }
+        {/* { children } */}
+        <AppRouter />
 
     </ThemeProvider>
     )
