@@ -7,7 +7,7 @@ export const AppRouter = () => {
     return (
         <Routes>
             <Route path="/" element={ <App /> }/>
-            <Route path="/admin" element={ <Admin /> }/>
+            <Route path="https://regalex-express.vercel.app/admin" element={ <Admin /> }/>
 
             <Route path="/*" element={ <Navigate to="/" /> } />
         </Routes>
