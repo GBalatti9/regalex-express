@@ -6,8 +6,7 @@ export const uploadNewItem = async ( data ) => {
 
     const formattedData = new URLSearchParams({
         Producto: data.Producto,
-        // Cantidad: data.Cantidad,
-        Cantidad: 'Estirar de la celda de arriba para activar el funcionamiento',
+        Cantidad: data.Cantidad,
         Imagen: data.Imagen,
         Estado: 'Estirar de la celda de arriba para activar el funcionamiento',
         SheetName: 'Hoja1'
